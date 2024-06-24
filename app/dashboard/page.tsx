@@ -19,7 +19,7 @@ export default function Home() {
     <h1>List of Users</h1>
     {loading && <p>Loading...</p>}
     {error && <p>Error: {error.message}</p>}
-    {data && data.users.map((user) => (
+    {data && data.users.map((user: any) => (
       <div key={user.id}>
         <h2>{user.name}</h2>
         <p>{user.email}</p>

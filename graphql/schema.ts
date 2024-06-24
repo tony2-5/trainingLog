@@ -30,4 +30,9 @@ export const typeDefs = `#graphql
   }
 
   scalar DateTime
+
+  type Mutation {
+    signup(email: String!, password: String!, name: String!): User
+    # login(email: String!, password: String!): User
+  }
 `;
