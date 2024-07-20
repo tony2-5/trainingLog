@@ -1,24 +1,32 @@
 'use client'
-
-import { Alert } from '@/components/ui/alert'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { useState } from 'react'
 import { signIn } from 'next-auth/react';
-export const SignInForm = ({callbackUrl}: {callbackUrl: string}) => {
+import { useRouter } from 'next/navigation'
+
+export const SignInForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const router = useRouter()
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    await signIn('credentials', {
+    const response = await signIn('credentials', {
       email: email,
       password: password,
-      redirect: true,
-      callbackUrl: callbackUrl ?? "http://localhost:3000"
+      redirect: false,
     })
-    
+
+    if(response?.ok) {
+      router.push("/dashboard");
+      router.refresh()
+    } else {
+      console.log(response?.error)
+      toast("Credentials do not match!", { type: "error" });
+    }
   }
 
   return (
@@ -47,7 +55,6 @@ export const SignInForm = ({callbackUrl}: {callbackUrl: string}) => {
           placeholder="Enter your password"
         />
       </div>
-      {error && <Alert>{error}</Alert>}
       <div className="w-full">
         <Button type='submit' className="w-full" size="lg">
           Login

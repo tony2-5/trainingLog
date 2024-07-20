@@ -1,10 +1,10 @@
 'use client'
-
-import { Alert } from '@/components/ui/alert'
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const REGISTER_USER = gql`
 mutation Mutation($email: String!, $password: String!, $name: String!) {
@@ -20,11 +20,11 @@ export const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUser] = useState('')
-  const [addUser, { data, loading, error }] = useMutation(REGISTER_USER);
+  const [addUser, { data, loading, error, reset }] = useMutation(REGISTER_USER);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    addUser({ variables: { email: email, password: password, name: username } });
+    addUser({ variables: { email: email, password: password, name: username }});
     setEmail('')
     setPassword('')
     setUser('')
@@ -32,9 +32,9 @@ export const Register = () => {
 
   return (
     <>
-      {error && <Alert variant='destructive'>{error.message}</Alert>}
-      {data && <Alert variant='success'>Successfully Registered!</Alert>}
-      <form onSubmit={onSubmit} className="space-y-12 w-full sm:w-[400px]">
+      {error && toast("Register error!", { type: "error" }) && reset()}
+      {data && toast("Register success!", { type: 'success'}) && reset()}
+      {loading ? <div className="space-y-12 w-full sm:w-[400px]">Registering...</div>:<form onSubmit={onSubmit} className="space-y-12 w-full sm:w-[400px]">
         <div className="grid w-full items-center gap-1.5">
           <Input
             className="w-full"
@@ -76,7 +76,7 @@ export const Register = () => {
             Register
           </Button>
         </div>
-      </form>
+      </form>}
     </>
   )
 }
