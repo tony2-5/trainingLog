@@ -37,5 +37,6 @@ export const typeDefs = `#graphql
     # login(email: String!, password: String!): User
     deleteaccount(id: ID!): User!
     updateuser(id: ID!, name: String): User!
+    updatepassword(id: ID!, passwordOld: String, passwordNew: String): User!
   }
 `;

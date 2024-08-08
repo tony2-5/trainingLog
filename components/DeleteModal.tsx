@@ -1,41 +1,36 @@
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
-
-export default function DeleteModal({modalText}: any) {
+import { DELETE_USER } from "@/graphql/mutations";
+import { useMutation } from "@apollo/client";
+import { signOut } from "next-auth/react";
+export default function DeleteModal({session, disabled}: any) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
+  const [deleteUser, {loading}] = useMutation(DELETE_USER);
+  const onSubmitDeleteUser = () => {
+    deleteUser({ variables: { deleteaccountId: session.user.id}})
+    signOut({ callbackUrl: 'http://localhost:3000/' })
+  }
   return (
     <>
-      <Button onPress={onOpen} className="w-full bg-red-500 font-extrabold" size="md">Delete Account</Button>
+      <Button isDisabled={disabled} onPress={onOpen} className="w-full bg-red-500 font-extrabold" size="md">Delete Account</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">Delete Account</ModalHeader>
               <ModalBody>
+                <p>
+                  Are you sure you want to delete your account?
+                </p>
                 <p> 
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit
-                  dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. 
-                  Velit duis sit officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. 
-                  Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur 
-                  proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
+                  <strong>Warning the following action is permanent.</strong>
                 </p>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button isDisabled={loading ? true:false} color="primary" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
+                <Button isDisabled={loading ? true:false} color="danger" onPress={onSubmitDeleteUser}>
+                  Delete Account
                 </Button>
               </ModalFooter>
             </>

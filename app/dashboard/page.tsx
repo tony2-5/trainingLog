@@ -1,5 +1,6 @@
 'use client'
 import { useQuery, gql } from '@apollo/client'
+import { useEffect } from 'react';
 
 const GET_USERS = gql`
   query Users {
@@ -13,7 +14,9 @@ const GET_USERS = gql`
 `
 export default function Home() {
   const { loading, error, data } = useQuery(GET_USERS);
-  console.log(data)
+  useEffect(() => {
+    console.log(data)
+  }, [data,loading])
   return (
   <div>
     <h1>List of Users</h1>
