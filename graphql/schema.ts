@@ -26,8 +26,17 @@ export const typeDefs = `#graphql
 
   type Query {
     users: [User]
+    user(id: ID!): User
     usersMiles: [UserMileage]
   }
 
   scalar DateTime
+
+  type Mutation {
+    signup(email: String!, password: String!, name: String!): User
+    # login(email: String!, password: String!): User
+    deleteaccount(id: ID!): User!
+    updateuser(id: ID!, name: String): User!
+    updatepassword(id: ID!, passwordOld: String, passwordNew: String): User!
+  }
 `;
