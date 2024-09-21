@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Modal, Button, ModalHeader, ModalBody, ModalFooter, ModalContent, useDisclosure, Input } from "@nextui-org/react";
 
 export default function ScheduleCalendar({session}:any) {
-  const calendarRef = useRef(null)
+  const calendarRef = useRef<any>(null)
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [buttonClick, setButtonClick] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
