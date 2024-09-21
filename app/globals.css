@@ -59,3 +59,32 @@
     --ring: 346.8 77.2% 49.8%;
   }
 }
+.fc-direction-ltr {
+  height: 85vh;
+  margin: 1vw
+}
+
+.fc-daygrid-day-frame, .fc-daygrid-day-events, .fc-daygrid-event-harness, a.fc-event {
+  height: 100%;
+  padding: 1px;
+  padding-bottom: 2px;
+  align-content: center;
+}
+
+.fc-event-title {
+  font-size: 5vw;
+}
+
+a.fc-event {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a.fc-event > div.fc-event-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width:100%;
+  height:100%;
+}

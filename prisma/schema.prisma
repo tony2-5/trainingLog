@@ -19,17 +19,16 @@ model User {
 }
 
 model UserMileage {
-  daysMiles       MileageGoals @relation(fields: [mileageGoalDay], references: [day])
-  mileageGoalDay  DateTime @db.Date
-  user            User @relation(fields: [userId], references: [id])
+  date        String @id 
   userId          String
-
-  @@id([mileageGoalDay, userId])
-}
-model MileageGoals {
-  day        DateTime @id @default(now()) @db.Date
   miles      String
   completed  Boolean  @default(false)
-  incomplete Boolean?
-  user UserMileage[]
+  user            User @relation(fields: [userId], references: [id])
 }
+
+// model MileageGoals {
+//   day        DateTime @id @db.Date
+//   miles      String
+//   completed  Boolean  @default(false)
+//   user UserMileage[]
+// }

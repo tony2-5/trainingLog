@@ -4,8 +4,9 @@ import { useMutation } from "@apollo/client";
 import { signOut } from "next-auth/react";
 export default function DeleteModal({session, disabled}: any) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const [deleteUser, {loading}] = useMutation(DELETE_USER);
+  const [deleteUser, {loading, error}] = useMutation(DELETE_USER);
   const onSubmitDeleteUser = () => {
+    // TODO: fix foreign key constraint (drop event table)
     deleteUser({ variables: { deleteaccountId: session.user.id}})
     signOut({ callbackUrl: 'http://localhost:3000/' })
   }
