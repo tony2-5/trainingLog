@@ -59,7 +59,7 @@ export default function ScheduleCalendar({session}:any) {
   useEffect(() => {
     // TODO: possibly implement method to individually remove/update/add events for better efficiency
     if(userMilesData) {
-      const calendarApi = calendarRef.current.getApi()
+      const calendarApi = calendarRef.current?.getApi()
       calendarApi.removeAllEvents()
       for(let item of userMilesData.userMiles) {
         calendarApi.addEvent({
@@ -104,7 +104,7 @@ export default function ScheduleCalendar({session}:any) {
   }
 
   function handleEventClick(clickInfo: any) {
-    const calendarApi = calendarRef.current.getApi()
+    const calendarApi = calendarRef.current?.getApi()
     if(!buttonClick) {
       setUpdateModal(true)
       setSelectedDate(clickInfo.event.startStr);
