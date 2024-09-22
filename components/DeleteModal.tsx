@@ -1,12 +1,13 @@
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
-import { DELETE_USER } from "@/graphql/mutations";
+import { DELETE_USER, DELETE_USERMILEAGE } from "@/graphql/mutations";
 import { useMutation } from "@apollo/client";
 import { signOut } from "next-auth/react";
 export default function DeleteModal({session, disabled}: any) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const [deleteUser, {loading, error}] = useMutation(DELETE_USER);
+  const [deleteUser, {loading}] = useMutation(DELETE_USER);
+  const [deleteUserMileage] = useMutation(DELETE_USERMILEAGE);
   const onSubmitDeleteUser = () => {
-    // TODO: fix foreign key constraint (drop event table)
+    deleteUserMileage({ variables: {deleteusermileageId: session.user.id}})
     deleteUser({ variables: { deleteaccountId: session.user.id}})
     signOut({ callbackUrl: 'http://localhost:3000/' })
   }

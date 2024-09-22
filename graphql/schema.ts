@@ -16,6 +16,10 @@ export const typeDefs = `#graphql
     completed: Boolean!
   }
 
+  type BatchPayload {
+   count: Int!
+  }
+
   type Query {
     users: [User]
     user(id: ID!): User
@@ -35,5 +39,6 @@ export const typeDefs = `#graphql
     deletemileagegoal(date: String!, id: ID!): UserMileage!
     updatemileagegoal(date: String!, id: ID!, miles: String!): UserMileage!
     setgoalcomplete(date: String!, id: ID!, completed: Boolean!): UserMileage!
+    deleteusermileage(id: ID!): BatchPayload!
   }
 `;

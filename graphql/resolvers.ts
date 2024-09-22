@@ -95,5 +95,9 @@ export const resolvers = {
       })
      return mileagedata
    },
+   deleteusermileage: async(parent: any, args: any, context: Context) => {
+    const mileagedata = await context.prisma.userMileage.deleteMany({where: { userId: args.id }})
+    return mileagedata
+  },
   }
 };
