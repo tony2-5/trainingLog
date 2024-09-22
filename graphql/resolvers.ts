@@ -3,8 +3,17 @@ const bcrypt = require('bcryptjs');
 
 export const resolvers = {
   Query: {
-    usersMiles: async(parent: any, args: any, context: Context) => {
-      return await context.prisma.userMileage.findMany();
+    userMiles: async(parent: any, args: any, context: Context) => {
+      return await context.prisma.userMileage.findMany({where: { userId: args.id},
+        include: {
+        user: true
+      }});
+    },
+    userMile: async(parent: any, args: any, context: Context) => {
+      return await context.prisma.userMileage.findUnique({where: {date: args.date, userId: args.id},
+        include: {
+        user: true
+      }});
     },
     users: async(parent: any, args: any, context: Context) => {
       return await context.prisma.user.findMany();
@@ -14,6 +23,7 @@ export const resolvers = {
     },
   },
   Mutation: {
+    // USER MUTATIONS
     signup: async(parent: any, args: any, context: Context) => {
       const password = await bcrypt.hash(args.password, 10)
 
@@ -41,18 +51,49 @@ export const resolvers = {
       user = await context.prisma.user.update({where: { id: args.id }, data: { password: password } })
       return user
     },
-    // login: async(parent: any, args: any, context: Context) => {
-    //   const user = await context.prisma.user.findUnique({ where: { email: args.email } })
-    //   if (!user) {
-    //     throw new Error('No such user found')
-    //   }
-
-    //   const valid = await bcrypt.compare(args.password, user.password)
-    //   if (!valid) {
-    //     throw new Error('Invalid password')
-    //   }
-
-    //   return user
-    // }
+    // MILEAGE GOAL MUTATIONS
+    addmileagegoal: async(parent: any, args: any, context: Context) => {
+      const mileagedata = await context.prisma.userMileage.create({ data: 
+        { 
+          date: args.date,
+          miles: args.miles,
+          user: {
+            connect: { id: args.id }
+          }
+        },
+        include: {
+          user: true
+        }
+      })
+      return mileagedata
+    },
+    deletemileagegoal: async(parent: any, args: any, context: Context) => {
+      const mileagedata = await context.prisma.userMileage.delete({where: { userId: args.id, 
+        date: args.date
+      },
+      include: {
+        user: true
+      }
+      })
+      return mileagedata
+    },
+    updatemileagegoal: async(parent: any, args: any, context: Context) => {
+      const mileagedata = await context.prisma.userMileage.update({where: { userId: args.id, date: args.date}, 
+      include: {
+        user: true
+      },
+      data: { miles: args.miles } 
+      })
+      return mileagedata
+    },
+    setgoalcomplete: async(parent: any, args: any, context: Context) => {
+     const mileagedata = await context.prisma.userMileage.update({where: { userId: args.id, date: args.date},
+      include: {
+        user: true
+      },
+      data: { completed: args.completed },
+      })
+     return mileagedata
+   },
   }
 };

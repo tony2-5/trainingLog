@@ -10,24 +10,17 @@ export const typeDefs = `#graphql
   }
 
   type UserMileage {
-    id: ID!
-    daysMiles: MileageGoals!
-    mileageGoalDay: DateTime!
+    date: String!
     user: User!
-  }
-
-  type MileageGoals {
-    day: DateTime!
     miles: String!
     completed: Boolean!
-    incomplete: Boolean
-    user: [UserMileage!]!
   }
 
   type Query {
     users: [User]
     user(id: ID!): User
-    usersMiles: [UserMileage]
+    userMiles(id: ID!): [UserMileage]
+    userMile(date: String!, id: ID!): UserMileage
   }
 
   scalar DateTime
@@ -38,5 +31,9 @@ export const typeDefs = `#graphql
     deleteaccount(id: ID!): User!
     updateuser(id: ID!, name: String): User!
     updatepassword(id: ID!, passwordOld: String, passwordNew: String): User!
+    addmileagegoal(date: String!, id: ID!, miles: String!): UserMileage!
+    deletemileagegoal(date: String!, id: ID!): UserMileage!
+    updatemileagegoal(date: String!, id: ID!, miles: String!): UserMileage!
+    setgoalcomplete(date: String!, id: ID!, completed: Boolean!): UserMileage!
   }
 `;
