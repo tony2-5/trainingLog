@@ -59,6 +59,10 @@
     --ring: 346.8 77.2% 49.8%;
   }
 }
+.fc-daygrid-day-frame, .fc-scrollgrid-sync-inner {
+  display: flex;
+  flex-direction: column;
+}
 .fc-direction-ltr {
   height: 85vh;
   margin: 1vw
@@ -71,7 +75,7 @@
   align-content: center;
 }
 
-.fc-event-title {
+#event-title {
   font-size: 5vw;
 }
 
@@ -87,4 +91,9 @@ a.fc-event > div.fc-event-main {
   justify-content: space-evenly;
   width:100%;
   height:100%;
+}
+
+.fc-event-title-container {
+  display: flex;
+  justify-content: center;
 }
