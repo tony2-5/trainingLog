@@ -8,7 +8,7 @@ export default function TrainingGraph({session,daysArr,chunkedDaysArr}:any) {
   const { data: userMilesData} = useQuery(GET_USERMILES_DATES, {
     variables: {userMilesDatesId: session.user.id, dates: daysArr},
   });
-  const [mileData, setMileData] = useState([])
+  const [mileData, setMileData] = useState<any>([])
   let barChartObj: any = []
   useEffect(() => {
     // filter queried data for completed mileage days
