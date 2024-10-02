@@ -24,6 +24,7 @@ export const typeDefs = `#graphql
     users: [User]
     user(id: ID!): User
     userMiles(id: ID!): [UserMileage]
+    userMilesDates(id: ID!, dates: [String!]): [UserMileage]
     userMile(date: String!, id: ID!): UserMileage
   }
 

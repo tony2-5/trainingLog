@@ -50,6 +50,7 @@ export default function ScheduleCalendar({session}:any) {
     ]
   })
   const [userMileQuery, {data: individualMileData}] = useLazyQuery(GET_USERMILE,{
+    // make refetch each time incase completed gets updated
     fetchPolicy: 'network-only',
   })
   const { data: userMilesData, loading: userMilesLoading, error: userMilesError } = useQuery(GET_USERMILES, {

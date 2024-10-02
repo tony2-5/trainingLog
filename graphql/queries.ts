@@ -22,6 +22,18 @@ query userMiles($userMilesId: ID!) {
   }
 }
 `
+export const GET_USERMILES_DATES = gql`
+query UserMilesDates($userMilesDatesId: ID!, $dates: [String!]) {
+  userMilesDates(id: $userMilesDatesId, dates: $dates) {
+    user {
+      id
+    }
+    miles
+    date
+    completed
+  }
+}
+`
 export const GET_USERMILE = gql`
 query userMile($date: String!, $userMileId: ID!) {
   userMile(date: $date, id: $userMileId) {
