@@ -9,6 +9,18 @@ export const resolvers = {
         user: true
       }});
     },
+    userMilesDates: async(parent: any, args: any, context: Context) => {
+      const data = await context.prisma.userMileage.findMany(
+        {
+          where: { 
+            userId: args.id,
+            date: {in: args.dates}
+          },
+          include: {
+            user: true
+      }});
+      return data
+    },
     userMile: async(parent: any, args: any, context: Context) => {
       return await context.prisma.userMileage.findUnique({where: {date: args.date, userId: args.id},
         include: {
