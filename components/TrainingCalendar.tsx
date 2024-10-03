@@ -29,7 +29,7 @@ export default function TrainingCalendar({session}:any) {
   }, [userMilesData])
 
   return (
-    <div className='relative'>
+    <div className='relative calendar-container'>
       <FullCalendar
         ref={calendarRef}
         plugins={[ dayGridPlugin ]}

@@ -10,26 +10,26 @@ import profilepic from "@/images/defaultprofile.svg"
 export default async function Nav() {
   const session = await getServerSession(authOptions)
   return ( 
-    <Navbar>
-    <NavbarContent className="hidden sm:flex gap-4" justify="start">
+  <Navbar className="bg-slate-500	text-white p-1 border-b-2	border-slate-700">
+    <NavbarContent className="flex gap-4" justify="start">
       <NavbarBrand>
-        <Link className="hidden sm:flex gap-2 items-center" href="/">
+        <Link className="flex gap-2 items-center" href="/">
           <Image src={icon} height={32} width={32} alt="Running logo"/>
           <p className="font-bold text-inherit">Tony-D Training</p>
         </Link>
       </NavbarBrand>
     </NavbarContent>
-    <NavbarContent className="hidden sm:flex gap-4" justify="center">
+    <NavbarContent className="flex gap-4" justify="center">
       <NavbarItem>
-        <Link color="font-bold text-inherit" href="/dashboard">
-          Dashboard
+        <Link href="/dashboard">
+          <h2 className="font-bold">Dashboard</h2>
         </Link>
       </NavbarItem>
     </NavbarContent>
     <NavbarContent justify="end">
       {!session &&
       <>
-        <NavbarItem className="hidden lg:flex">
+        <NavbarItem className="flex">
           <LoginButton/>
         </NavbarItem>
         <NavbarItem>
@@ -38,13 +38,13 @@ export default async function Nav() {
       </>
       }
       {session && 
-      <div className="sm:flex gap-6">
-        <NavbarItem className="hidden lg:flex">
+      <div className="flex gap-6">
+        <NavbarItem className="flex">
           <LogoutButton/>
         </NavbarItem>
-        <NavbarItem className="hidden lg:flex">
-          <Link className="hidden sm:flex gap-2 items-center" href="/profile">
-            <Image src={profilepic} height={48} width={48} alt="Default profile picture"/>
+        <NavbarItem className="flex">
+          <Link className="flex gap-2 items-center" href="/profile">
+            <Image className="h-11 w-11 hover:w-12 hover:h-12" src={profilepic} alt="Default profile picture"/>
           </Link>
         </NavbarItem>
       </div>

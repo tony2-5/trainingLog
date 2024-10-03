@@ -63,9 +63,13 @@
   display: flex;
   flex-direction: column;
 }
-.fc-direction-ltr {
+.calendar-container {
   height: 85vh;
   margin: 1vw
+}
+
+.fc-direction-ltr {
+  height: 100%;
 }
 
 .fc-daygrid-day-frame, .fc-daygrid-day-events, .fc-daygrid-event-harness, a.fc-event {
@@ -96,4 +100,13 @@ a.fc-event > div.fc-event-main {
 .fc-event-title-container {
   display: flex;
   justify-content: center;
+}
+
+#dashboardCalendar {
+  width: 42vw;
+  height: 40vh;
+  padding-top:.25em;
+  padding-right: 1em;
+  padding-left: 1em;
+  padding-bottom: 3em;
 }
