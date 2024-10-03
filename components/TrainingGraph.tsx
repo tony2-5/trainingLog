@@ -37,7 +37,6 @@ export default function TrainingGraph({session,daysArr,chunkedDaysArr}:any) {
     <div className="m-16">
       {mileData && <ResponsiveContainer width="100%" height={600}>
         <BarChart data={barChartObj} barCategoryGap="1%" >
-      
           <XAxis 
             dataKey="dateTitle"
             interval={0}
