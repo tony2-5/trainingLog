@@ -6,7 +6,7 @@ import { SessionProvider } from 'next-auth/react'
 
 export const Providers = ({children} : {children: React.ReactNode}) => {
   const client = new ApolloClient({
-    uri: 'http://localhost:3000/api',
+    uri: '/api',
     cache: new InMemoryCache(),
   });
   return (
