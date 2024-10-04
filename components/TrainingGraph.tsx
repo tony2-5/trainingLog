@@ -2,13 +2,14 @@
 import {ResponsiveContainer, BarChart, Bar, Tooltip, YAxis, XAxis} from 'recharts'
 import { GET_USERMILES_DATES } from '@/graphql/queries'
 import { useQuery } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 
 export default function TrainingGraph({session,daysArr,chunkedDaysArr}:any) {
-  const { data: userMilesData} = useQuery(GET_USERMILES_DATES, {
+  const { data: userMilesData, loading} = useQuery(GET_USERMILES_DATES, {
     variables: {userMilesDatesId: session.user.id, dates: daysArr},
   });
   const [mileData, setMileData] = useState<any>([])
+  const [barChartData, setBarChartData] = useState<any>([])
   let barChartObj: any = []
   useEffect(() => {
     // filter queried data for completed mileage days
@@ -32,11 +33,15 @@ export default function TrainingGraph({session,daysArr,chunkedDaysArr}:any) {
       }
     }
   },[mileData])
-
+  useEffect(()=>{
+    if(barChartObj.length===16) {
+      setBarChartData(barChartObj)
+    }
+  },[barChartObj])
   return (
     <div className="m-16">
       {mileData && <ResponsiveContainer width="100%" height={600}>
-        <BarChart data={barChartObj} barCategoryGap="1%" >
+        <BarChart data={barChartData} barCategoryGap="1%" >
           <XAxis 
             dataKey="dateTitle"
             interval={0}
