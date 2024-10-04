@@ -12,7 +12,7 @@ export default async function Home() {
   <div>
     <div className="flex flex-col w-screen pt-8">
       <div className="flex justify-center">
-        <h1 className="font-raleway text-6xl font-medium mt-2 mb-16">Welcome to Tony's Training</h1>
+        <h1 className="font-raleway text-6xl font-medium mt-2 mb-16">Welcome to Tony&apos;s Training</h1>
       </div>
       <div className="flex flex-col gap-12">
         <div className="flex">

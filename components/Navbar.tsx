@@ -15,7 +15,7 @@ export default async function Nav() {
       <NavbarBrand>
         <Link className="flex gap-2 items-center" href="/">
           <Image src={icon} height={32} width={32} alt="Running logo"/>
-          <p className="font-bold text-inherit">Tony's Training</p>
+          <p className="font-bold text-inherit">Tony&apos;s Training</p>
         </Link>
       </NavbarBrand>
     </NavbarContent>
