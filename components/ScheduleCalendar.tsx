@@ -158,7 +158,7 @@ export default function ScheduleCalendar({session}:any) {
 
   return (
     <>
-    <div className='relative calendar-container'>
+    <div id="scheduleCalendarPageCalendar" className='relative calendar-container'>
       <FullCalendar
         ref={calendarRef}
         selectable={true}
