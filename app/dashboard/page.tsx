@@ -25,8 +25,8 @@ export default function Home() {
     <div className='flex flex-col justify-center items-center gap-10 pt-8'>
       <div className="flex gap-16">
         <Link href="/dashboard/scheduleTraining">
-          <div className="text-center hover:bg-slate-100" id="dashboardCalendar">
-            <h2 className="m-1 font-bold text-lg">Schedule Weeks Training</h2>
+          <div className="text-center hover:bg-slate-100 dashboardCalendar">
+            <h2 className="m-1 font-medium smaller-font font-raleway">Schedule Weeks Training</h2>
               <FullCalendar
               plugins={[ dayGridPlugin ]}
               initialView="dayGridWeek"
@@ -36,8 +36,8 @@ export default function Home() {
           </div>
         </Link>
         <Link href="/dashboard/trainingCalendar">
-          <div className="text-center hover:bg-slate-100" id="dashboardCalendar">
-            <h2 className="m-1 font-bold text-lg">View Training Calendar</h2>
+          <div className="text-center hover:bg-slate-100 dashboardCalendar">
+            <h2 className="m-1 font-medium smaller-font font-raleway">View Training Calendar</h2>
               <FullCalendar
               plugins={[ dayGridPlugin ]}
               initialView="dayGridMonth"
@@ -47,8 +47,8 @@ export default function Home() {
         </Link>
       </div>
       <Link href="/dashboard/trainingGraph">
-        <div className="text-center hover:bg-slate-100" id="dashboardCalendar">
-            <h2 className="m-1 font-bold text-lg">View Training Graph</h2>
+        <div className="text-center dashboardCalendar hover:bg-slate-100">
+            <h2 className="m-1 font-medium smaller-font font-raleway">View Training Graph</h2>
             <ResponsiveContainer width="100%" height="100%">
             <BarChart data={exampleData} barCategoryGap="1%">
               <XAxis dataKey="dateTitle"/>
